@@ -66,7 +66,7 @@ def get_latents(
     translate: Tuple[float,float] =(0,0),
     rotate: float = 0
 ):
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
     print('Loading networks from "%s"...' % network_pkl)
     device = torch.device('cuda')
     with dnnlib.util.open_url(network_pkl) as f:

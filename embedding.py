@@ -56,7 +56,7 @@ def train(
         reg: float
 ):
     device = torch.device('cuda')
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
     writer = SummaryWriter(log_dir="tensorboard_logs/logs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
     transform = transforms.Compose([transforms.Resize(1024), transforms.ToTensor()])

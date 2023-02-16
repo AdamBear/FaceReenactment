@@ -73,7 +73,7 @@ def generate_images(network_pkl, z, translate=(0,0), rotate=0):
 
 def visualize_images():
     device = torch.device('cuda')
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
 
     #Choose latents to visualize
     with open('latents_edited_happy.pkl', 'rb') as f:

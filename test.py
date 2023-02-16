@@ -37,7 +37,7 @@ def generate_images(network_pkl, z, translate=(0,0), rotate=0):
 
 def test():
     device = torch.device('cuda')
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
     #transform = transforms.Compose([transforms.Resize(1024), transforms.ToTensor()])
     transform = transforms.Compose([transforms.Resize(580), transforms.ToTensor()])
     os.makedirs("test", exist_ok=True)

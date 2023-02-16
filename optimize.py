@@ -81,7 +81,7 @@ def generate_images(network_pkl, z, translate=(0,0), rotate=0):
 def embedding_function():
 
     device = torch.device('cuda')
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
     transform = transforms.Compose([transforms.Resize(1024), transforms.ToTensor()])
     latents_list = []
     imgdir = sorted(glob('./frame_angry_cut/*.png'))

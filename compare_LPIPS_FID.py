@@ -7,7 +7,7 @@ from PIL import Image
 
 def calc_metrics():
     device = torch.device('cuda')
-    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
     transform = transforms.Compose([transforms.ToTensor()])
 
     imgdir = sorted(glob('./imgdir/*.png'))
