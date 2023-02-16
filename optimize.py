@@ -86,7 +86,12 @@ def embedding_function():
     latents_list = []
     imgdir = sorted(glob('./rgb_5000/*.png'))
 
-    for i in range(954):
+    model = mapping_net_opt.MappingNetwork()
+    model.load_state_dict(torch.load("./model_last_5000.pth"))
+    model.to(device)
+    model.eval()
+
+    for i in range(len(imgdir)):
         print(imgdir[i])
         image = Image.open(imgdir[i])
         image = image.convert("RGB")
@@ -97,11 +102,7 @@ def embedding_function():
         # MSE loss object
         MSE_loss = nn.MSELoss(reduction="mean")
 
-        model = mapping_net_opt.MappingNetwork()
-        model.load_state_dict(torch.load("./model_last_5000.pth"))
-        model.to(device)
-        model.eval()
-        if i == 0 or i == 115 or i == 232 or i == 336 or i == 447 or i == 569 or i == 699 or i == 822: # angry
+        #if i == 0 or i == 115 or i == 232 or i == 336 or i == 447 or i == 569 or i == 699 or i == 822: # angry
         # if i == 0 or i == 105 or i == 212 or i == 316 or i == 419 or i == 529 or i == 648 or i == 773: # calm
         # if i == 0 or i == 115 or i == 231 or i == 347 or i == 461 or i == 589 or i == 711 or i == 831: # disgust
         # if i == 0 or i == 109 or i == 217 or i == 319 or i == 429 or i == 578 or i == 704 or i == 822: # fearful
@@ -109,10 +110,10 @@ def embedding_function():
         # if i == 0 or i == 98 or i == 197 or i == 294: # neutral
         # if i == 0 or i == 114 or i == 220 or i == 324 or i == 424 or i == 537 or i == 647 or i == 758: # sad
         # if i == 0 or i == 101 or i == 198 or i == 303 or i == 400 or i == 502 or i == 608 or i == 712: #surprise
-            latents = model.forward(image)
-            latents_copy = latents.clone().detach()
-            latents_copy = torch.reshape(latents_copy, (1, 16, 512))
-            latents_copy.requires_grad = True
+        latents = model.forward(image)
+        latents_copy = latents.clone().detach()
+        latents_copy = torch.reshape(latents_copy, (1, 16, 512))
+        latents_copy.requires_grad = True
         #latents_rand = torch.zeros((1, 512), requires_grad=True, device=device)
 
         # Optimizer to change latent code in each backward step
