@@ -86,10 +86,8 @@ def embedding_function():
     latents_list = []
     imgdir = sorted(glob('./rgb_5000/*.png'))
 
-    model = mapping_net_opt.MappingNetwork()
-    model.load_state_dict(torch.load("./model_last_5000.pth"))
-    model.to(device)
-    model.eval()
+    loss_fn_alex = lpips.LPIPS(net='alex')
+    loss_fn_alex.to(device)
 
     for i in range(len(imgdir)):
         print(imgdir[i])
@@ -98,6 +96,11 @@ def embedding_function():
         image = transform(image)
         image = image.unsqueeze(0)
         image = image.to(device)
+
+        model = mapping_net_opt.MappingNetwork()
+        model.load_state_dict(torch.load("./model_last_5000.pth"))
+        model.to(device)
+        model.eval()
 
         # MSE loss object
         MSE_loss = nn.MSELoss(reduction="mean")
@@ -129,8 +132,6 @@ def embedding_function():
             #syn_img = generate_images(network_pkl="https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan3/versions/1/files/stylegan3-r-ffhq-1024x1024.pkl", z=latents_rand)
             syn_img = (syn_img + 1.0) / 2.0
             mse = MSE_loss(syn_img, image)
-            loss_fn_alex = lpips.LPIPS(net='alex')
-            loss_fn_alex.to(device)
             p = loss_fn_alex(syn_img, image)
             psnr = PSNR(mse, flag=0)
             loss = mse + p
