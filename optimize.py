@@ -84,7 +84,7 @@ def embedding_function():
 
     transform = transforms.Compose([transforms.Resize(1024), transforms.ToTensor()])
     latents_list = []
-    imgdir = sorted(glob('./frame_angry_cut/*.png'))
+    imgdir = sorted(glob('./rgb_5000/*.png'))
 
     for i in range(954):
         print(imgdir[i])
