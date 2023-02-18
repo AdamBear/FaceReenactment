@@ -66,7 +66,7 @@ def train(
 
     transform = transforms.Compose([transforms.Resize(580), transforms.ToTensor()])
 
-    DATA_PATH_LIST = sorted(glob('./landmark_RAVDESS_final/*.png'))
+    DATA_PATH_LIST = sorted(glob('./rgb_5000/*.png'))
     dataset = MyDataset(DATA_PATH_LIST, transform)
     train_size = int(0.8 * len(dataset))
     test_size = len(dataset) - train_size
