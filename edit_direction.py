@@ -109,7 +109,7 @@ def linear_interpolate(boundary,
 
 if __name__ == "__main__":
     device = torch.device('cpu')
-    boundary = train_boundary('happy')
+    boundary = train_boundary('angry')
 
     #save the currently used boundary for later use
     with open('boundary.pkl', 'wb') as f:
@@ -124,7 +124,7 @@ if __name__ == "__main__":
         latents_list.append(edited_latents[i])
 
     #save edited latents as list -> visualize with visualize.py
-    with open('latents_edited_happy.pkl', 'wb') as g:
+    with open('latents_edited_angry.pkl', 'wb') as g:
         pickle.dump(latents_list, g)
 
 
