@@ -6,7 +6,7 @@ import pickle
 class MyDataset(Dataset):
     def __init__(self, data_path_list, transform):
         self.path_list = data_path_list
-        with open('latents_RAVDESS_final.pkl', 'rb') as f:
+        with open('latents_angry.pkl', 'rb') as f:
             self.latent = pickle.load(f)
         print(len(self.latent))
         self.transform = transform
